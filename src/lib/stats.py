@@ -21,9 +21,10 @@ def detect_outliers(df, column, threshold=3):
 
 def plot_boxplot(df, columns):
     """Create boxplots to visualize distribution and potential outliers for multiple columns."""
-    n_cols = 2
-    n_rows = (len(columns) + 1) // 2
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 5*n_rows))
+    n = len(columns)
+    rows = int(np.ceil(np.sqrt(n)))
+    cols = int(np.ceil(n / rows))
+    fig, axes = plt.subplots(rows, cols, figsize=(5*cols, 5*rows))
     axes = axes.flatten()
 
     ii = 0
@@ -40,13 +41,27 @@ def plot_boxplot(df, columns):
     plt.tight_layout()
     plt.show()
 
-def plot_histogram(df, column, bins=30):
-    """Plot a histogram of the data."""
-    plt.figure(figsize=(10, 6))
-    plt.hist(df[column].dropna(), bins=bins)
-    plt.title(f'Histogram: {column}')
-    plt.xlabel('Value')
-    plt.ylabel('Frequency')
+def plot_histogram(df, columns, bins=30):
+    """Plot histograms of the data for multiple columns."""
+    n = len(columns)
+    rows = int(np.ceil(np.sqrt(n)))
+    cols = int(np.ceil(n / rows))
+
+    fig, axes = plt.subplots(rows, cols, figsize=(5*cols, 4*rows))
+    axes = axes.flatten()
+
+    for i, column in enumerate(columns):
+        if i < n:
+            axes[i].hist(df[column].dropna(), bins=bins)
+            axes[i].set_title(f'Histogram: {column}')
+            axes[i].set_xlabel('Value')
+            axes[i].set_ylabel('Frequency')
+
+    # Remove any unused subplots
+    for j in range(n, len(axes)):
+        fig.delaxes(axes[j])
+
+    plt.tight_layout()
     plt.show()
 
 def check_stationarity(df, column, target: str = "stationary") -> bool:

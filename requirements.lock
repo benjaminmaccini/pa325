@@ -194,6 +194,7 @@ mypy-extensions==1.0.0
 nbclient==0.10.0
     # via nbconvert
 nbconvert==7.16.4
+    # via data-exploration
     # via jupyter
     # via jupyter-server
 nbformat==5.10.4
