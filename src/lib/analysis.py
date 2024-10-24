@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from scipy.optimize import curve_fit
+from scipy.optimize import curve_fit, minimize
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from typing import Callable
 
@@ -43,6 +43,24 @@ def remove_outliers(df: pd.DataFrame, columns: list, multiplier: float = 1.5) ->
         df = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
 
     return df.reset_index(drop=True)
+
+def keep_outliers(series: pd.Series, multiplier: float = 1.5) -> pd.Series:
+    """
+    Keep only outliers from a pandas Series.
+
+    Args:
+        series (pd.Series): Input Series.
+        multiplier (float): IQR multiplier for determining outliers. Default is 1.5.
+
+    Returns:
+        pd.Series: Series with only outliers kept.
+    """
+    Q1 = series.quantile(0.25)
+    Q3 = series.quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - (multiplier * IQR)
+    upper_bound = Q3 + (multiplier * IQR)
+    return series[(series < lower_bound) | (series > upper_bound)]
 
 def regression_error(model_function, x_data, y_data, p0, bounds: tuple, check_finite: bool = False, nan_policy="omit") -> float:
     popt, pcov = curve_fit(model_function, x_data, y_data, p0=p0, bounds=bounds, check_finite=check_finite, nan_policy=nan_policy)
@@ -116,3 +134,29 @@ def add_lag(df: pd.DataFrame, n: int) -> pd.Series:
         pd.Series: Lagged series.
     """
     return df.shift(periods=n, freq='D')
+
+def segments_fit(X, Y, count):
+    """
+    Credit: https://gist.github.com/ruoyu0088/70effade57483355bbd18b31dc370f2a
+    """
+    xmin = X.min()
+    xmax = X.max()
+
+    seg = np.full(count - 1, (xmax - xmin) / count)
+
+    px_init = np.r_[np.r_[xmin, seg].cumsum(), xmax]
+    py_init = np.array([Y[np.abs(X - x) < (xmax - xmin) * 0.01].mean() for x in px_init])
+
+    def func(p):
+        seg = p[:count - 1]
+        py = p[count - 1:]
+        px = np.r_[np.r_[xmin, seg].cumsum(), xmax]
+        return px, py
+
+    def err(p):
+        px, py = func(p)
+        Y2 = np.interp(X, px, py)
+        return np.mean((Y - Y2)**2)
+
+    r = minimize(err, x0=np.r_[seg, py_init], method='Nelder-Mead')
+    return func(r.x)
