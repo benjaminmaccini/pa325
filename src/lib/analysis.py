@@ -78,7 +78,41 @@ def keep_outliers(series: pd.Series, multiplier: float = 1.5) -> pd.Series:
     upper_bound = Q3 + (multiplier * IQR)
     return series[(series < lower_bound) | (series > upper_bound)]
 
-def regression_error(model_function, x_data, y_data, p0, bounds: tuple, check_finite: bool = False, nan_policy="omit") -> float:
+def regression_error(
+    model_function,
+    x_data,
+    y_data,
+    p0,
+    bounds: tuple,
+    check_finite: bool = False,
+    nan_policy="omit"
+) -> float:
+    """
+    For unknown parameters, fit a curve and output the regression error
+
+    Usage:
+        x_data = np.array([flow_local, flow_in, flow_out, c_in])
+
+        # Fit the curve on c_local, adjusting it to minimize the error
+        # Compare against smoothed salinity
+        # Median Salinity For Non-Point Sources in stormwater runoff (Dirrigl et al, 2016)
+        optimal_sal = analysis.regression_error(
+            model_function=analysis.base_salinity_function,
+            x_data=x_data,
+            y_data=analysis.moving_average(c_out,2),
+            p0=[671.],
+            bounds=((0,10000)),
+        )
+
+    Params:
+        model_function: A callable function to be fit
+        x_data: Parameters for the function
+        y_data: Function output to fit on
+        p0: A list of initial parameter values
+        bounds: Range for the parameters to be fit in
+        check_finite:
+        nan_policy: Whether or not to omit null values
+    """
     popt, pcov = curve_fit(model_function, x_data, y_data, p0=p0, bounds=bounds, check_finite=check_finite, nan_policy=nan_policy)
     print(f"Optimized parameter: {popt[0]}")
 
@@ -108,19 +142,6 @@ def regression_error(model_function, x_data, y_data, p0, bounds: tuple, check_fi
         print("Spearman Correlation could not be calculated due to insufficient data variability.")
 
     return popt[0]
-
-def add_lag(df: pd.DataFrame, n: int) -> pd.Series:
-    """
-    Transform a pandas series so that it is lagged by n days.
-
-    Args:
-        series (pd.Series): Input series with datetime index.
-        n (int): Number of days to lag the series by.
-
-    Returns:
-        pd.Series: Lagged series.
-    """
-    return df.shift(periods=n, freq='D')
 
 def segments_fit(X, Y, count):
     """

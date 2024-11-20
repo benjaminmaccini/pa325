@@ -1,4 +1,4 @@
-from typing_extensions import Optional
+from typing import Optional
 import pandas as pd
 import sqlite3
 

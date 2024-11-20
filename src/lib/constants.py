@@ -1,5 +1,6 @@
 TIMESTAMP_KEY = "DATE"
 
+# Field names corresponding to all_data.1v -- Order matters
 FIELD_NAMES = [
     "DATE",
     "UpstreamR0",
