@@ -22,6 +22,22 @@ def base_salinity_function(X, c_local):
     return (c_in * flow_in + c_local * flow_local) / (-1 * flow_out)
 
 
+def log_transform_sal_diff(X, c_local):
+    """
+    Take the log of the salinity differences
+
+    Gives np.log(delta_c_out)
+
+    14) $$ \log ( \Delta sal_{out} ) = \log ( \Delta sal_{local} ) + \log ( flow_{local} ) - \log ( flow_{out} )$$
+    """
+    flow_local, flow_out, c_in = X
+
+    # Ensure positive values for log
+    safe_sal_diff = c_local - c_in
+
+    return np.log(safe_sal_diff) + np.log(flow_local) - np.log(flow_out)
+
+
 def remove_outliers(df: pd.DataFrame, columns: list, multiplier: float = 1.5) -> pd.DataFrame:
     """
     Remove outliers from specified columns in a DataFrame.
@@ -92,35 +108,6 @@ def regression_error(model_function, x_data, y_data, p0, bounds: tuple, check_fi
         print("Spearman Correlation could not be calculated due to insufficient data variability.")
 
     return popt[0]
-
-def moving_average(data: pd.Series, window: int = 5) -> pd.Series:
-    """
-    Calculate the moving average of a given data series.
-
-    Args:
-        data (pd.Series): Input data series.
-        window (int): Size of the moving window.
-
-    Returns:
-        pd.Series: Series containing the moving average.
-    """
-    return data.rolling(window=window).mean()
-
-def add_moving_average_column(data: pd.DataFrame, column: str, window: int) -> pd.DataFrame:
-    """
-    Add a column with the x-day moving average to the input data.
-
-    Args:
-        data (pd.DataFrame): Input data frame.
-        column (str): Name of the column to calculate moving average for.
-        window (int): Size of the moving window.
-
-    Returns:
-        pd.DataFrame: DataFrame with an additional column for the moving average.
-    """
-    ma_column_name = f'{column}_{window}day_MA'
-    data[ma_column_name] = moving_average(data[column], window)
-    return data
 
 def add_lag(df: pd.DataFrame, n: int) -> pd.Series:
     """

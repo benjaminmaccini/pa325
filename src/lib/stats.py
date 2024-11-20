@@ -148,3 +148,19 @@ def check_data_consistency(df, column):
         print(f"Warning: Negative values found in {column}")
         return df[df[column] < 0]
     return pd.DataFrame()
+
+def get_stats(df, columns):
+    """
+    Print the mean, median, std dev, variance for all the columns
+    """
+    stats_dict = {}
+    for column in columns:
+        if column in df.columns:
+            stats_dict[column] = {
+                'mean': df[column].mean(),
+                'median': df[column].median(),
+                'std_dev': df[column].std(),
+                'variance': df[column].var()
+            }
+
+    return pd.DataFrame(stats_dict).T

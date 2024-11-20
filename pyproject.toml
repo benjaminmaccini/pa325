@@ -1,21 +1,17 @@
 [project]
-name = "data-exploration"
+name = "pa325"
 version = "0.1.0"
-description = "Add your description here"
-authors = [
-    { name = "Benjamin Maccini", email = "benjaminmaccini@gmail.com" }
-]
+description = "A data exploration toolkit for salinity in the Lower Rio Grande"
+authors = [{ name = "Benjamin Maccini", email = "benjaminmaccini@gmail.com" }]
 dependencies = [
     "jupyter>=1.1.1",
     "black>=24.10.0",
     "scipy>=1.14.1",
     "numpy>=2.1.2",
     "scikit-learn>=1.5.2",
-    "polars>=1.9.0",
     "matplotlib>=3.9.2",
     "seaborn>=0.13.2",
     "statsmodels>=0.14.4",
-    "datasette>=0.65",
     "pandas>=2.2.3",
     "pyqt6>=6.7.1",
     "nbconvert>=7.16.4",
@@ -40,8 +36,3 @@ packages = ["src/data_exploration"]
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
-
-[tool.rye.scripts]
-dss2sqlite = "python src/tools/dss2sqlite.py"
-huc2sqlite = "python src/tools/huc2sqlite.py"
-oasis2sqlite = "python src/tools/oasis2sqlite.py"
