@@ -1,0 +1,489 @@
+:FILE: brm_all_data.txt
+:FORMAT: Columns
+:SORT: TimeSeries
+:DELIMITER: ,
+:DATESLASH:
+
+:SUBSTITUTE: [GraphTitle]= "AllData"
+
+:TABLES:
+
+// Reach 0
+
+Table
+{    Title:      UpstreamR0
+    format: 9.0
+     value: inflow100
+}
+
+Table
+{    Title:      SaltR0
+    format: 9.0
+     value: salt100
+}
+
+// Reach 1
+
+Table
+{    Title:      UpstreamR1
+    format: 9.0
+     value: Convert_Units{flow100.150, M3, CMS }
+}
+
+Table
+{    Title:      PrecipitationR1
+    format: 9.0
+     value: Convert_Units{flow157.150, M3, CMS } * 10
+}
+
+Table
+{    Title:    EvaporationR1
+    format: 9.0
+     Value: convert_units{flow150.155, m3, cms}
+}
+
+Table
+{    Title:    PhreatophyteR1
+    format: 9.0
+     Value: convert_units{flow150.145, m3, cms}
+}
+
+Table
+{    Title:    UpperDemandTXR1
+    format: 9.0
+     Value: convert_units{flow150.140, m3, cms}
+}
+
+Table
+{    Title:    LowerDemandTXR1
+    format: 9.0
+     Value: convert_units{flow200.175, m3, cms}
+}
+
+Table
+{    Title:    RioAlamo
+    format: 9.0
+     Value: convert_units{flow135.150, m3, cms}
+}
+
+Table
+{    Title:    MAleman
+    format: 9.0
+     Value: convert_units{flow150.130, m3, cms}
+}
+
+Table
+{    Title:    CdMier
+    format: 9.0
+     Value: convert_units{flow150.120, m3, cms}
+}
+
+Table
+{    Title:    CdCamargo
+    format: 9.0
+     Value: convert_units{flow200.160, m3, cms}
+}
+
+Table
+{    Title:    DrenRancherias
+    format: 9.0
+     Value: convert_units{flow190.200, m3, cms}
+}
+
+Table
+{    Title:    DrenFresnos
+    format: 9.0
+     Value: convert_units{flow195.200, m3, cms}
+}
+
+Table
+{    Title:    RioSanJuan
+    format: 9.0
+     Value: convert_units{flow185.200, m3, cms}
+}
+
+Table
+{    Title:    MassBalanceR1
+    format: 9.0
+     value: convert_units{flow199.200 - flow200.198, m3, cms}
+}
+
+Table
+{    Title:      SaltToTR1
+    format: 9.0
+     value: salt150
+}
+
+Table
+{    Title:      SaltR1
+    format: 9.0
+     value: salt200
+}
+
+Table
+{    Title:      SaltMassBalanceR1
+    format: 9.0
+     value: SMB_1
+}
+
+// Reach 2
+
+Table
+{    Title:      UpstreamR2
+    format: 9.0
+     value: Convert_Units{flow200.250, M3, CMS }
+}
+
+
+Table
+{    Title:      PrecipitationR2
+    format: 9.0
+     value: Convert_Units{flow257.250, M3, CMS } * 10
+}
+
+Table
+{    Title:    UpperDemandTXR2
+    format: 9.0
+     Value: convert_units{flow250.240, m3, cms}
+}
+
+Table
+{    Title:    EvaporationR2
+    format: 9.0
+     Value: convert_units{flow250.255, m3, cms}
+}
+
+Table
+{    Title:    PhreatophyteR2
+    format: 9.0
+     Value: convert_units{flow250.245, m3, cms}
+}
+
+Table
+{    Title:    DownstreamR2
+    format: 9.0
+     Value: convert_units{flow250.300, m3, cms}
+}
+
+Table
+{    Title:    LowerDemandTXR2
+    format: 9.0
+     Value: convert_units{flow300.275, m3, cms}
+}
+
+Table
+{    Title:      DrenIndiosPuertecitos
+    format: 9.0
+     value: Convert_Units{flow235.250, M3, CMS }
+}
+
+Table
+{    Title:      DrenHuizaches
+    format: 9.0
+     value: Convert_Units{flow285.300, M3, CMS }
+}
+
+Table
+{    Title:    GDOrdaz
+    format: 9.0
+     Value: convert_units{flow250.230, m3, cms}
+}
+
+Table
+{    Title:    MassBalanceR2
+    format: 9.0
+     value: convert_units{flow299.300 - flow300.298, m3, cms}
+}
+
+Table
+{    Title:      SaltToTR2
+    format: 9.0
+     value: salt250
+}
+
+Table
+{    Title:      SaltR2
+    format: 9.0
+     value: salt300
+}
+
+Table
+{    Title:      SaltMassBalanceR2
+    format: 9.0
+     value: SMB_2
+}
+
+// Reach 3
+
+Table
+{    Title:      UpstreamR3
+    format: 9.0
+     value: Convert_Units{flow301.350, M3, CMS }
+}
+
+Table
+{    Title:      PrecipitationR3
+    format: 9.0
+     value: Convert_Units{flow357.350, M3, CMS } * 10
+}
+
+Table
+{    Title:    EvaporationR3
+    format: 9.0
+     Value: convert_units{flow350.355, m3, cms}
+}
+
+Table
+{    Title:    PhreatophyteR3
+    format: 9.0
+     Value: convert_units{flow350.345, m3, cms}
+}
+
+Table
+{    Title:    UpperDemandTXR3
+    format: 9.0
+     Value: convert_units{flow350.340, m3, cms}
+}
+
+Table
+{    Title:    LowerDemandTXR3
+    format: 9.0
+     Value: convert_units{flow400.375, m3, cms}
+}
+
+Table
+{    Title:    DrenMorillo
+    format: 9.0
+     Value: convert_units{flow295.301, m3, cms}
+}
+
+Table
+{    Title:    AnzadluasCanal
+    format: 9.0
+     Value: convert_units{flow301.280, m3, cms}
+}
+
+Table
+{    Title:    Reynosa
+    format: 9.0
+     Value: convert_units{flow350.320, m3, cms}
+}
+
+Table
+{    Title:    MassBalanceR3
+    format: 9.0
+     value: convert_units{flow399.400 - flow400.398, m3, cms}
+}
+
+Table
+{    Title:      SaltToTR3
+    format: 9.0
+     value: salt350
+}
+
+Table
+{    Title:      SaltR3
+    format: 9.0
+     value: salt400
+}
+
+Table
+{    Title:      SaltMassBalanceR3
+    format: 9.0
+     value: SMB_3
+}
+
+// Reach 4
+
+Table
+{    Title:      UpstreamR4
+    format: 9.0
+     value: Convert_Units{flow400.450, M3, CMS }
+}
+
+Table
+{    Title:      PrecipitationR4
+    format: 9.0
+     value: Convert_Units{flow457.450, M3, CMS } * 10
+}
+
+Table
+{    Title:    EvaporationR4
+    format: 9.0
+     Value: convert_units{flow450.455, m3, cms}
+}
+
+Table
+{    Title:    PhreatophyteR4
+    format: 9.0
+     Value: convert_units{flow450.445, m3, cms}
+}
+
+Table
+{    Title:    UpperDemandTXR4
+    format: 9.0
+     Value: convert_units{flow450.440, m3, cms}
+}
+
+Table
+{    Title:    LowerDemandTXR4
+    format: 9.0
+     Value: convert_units{flow500.475, m3, cms}
+}
+
+Table
+{    Title:    MassBalanceR4
+    format: 9.0
+     value: convert_units{flow499.500 - flow500.498, m3, cms}
+}
+
+Table
+{    Title:      SaltToTR4
+    format: 9.0
+     value: salt450
+}
+
+Table
+{    Title:      SaltR4
+    format: 9.0
+     value: salt500
+}
+
+Table
+{    Title:      SaltMassBalanceR4
+    format: 9.0
+     value: SMB_4
+}
+
+// Reach 5
+
+Table
+{    Title:      UpstreamR5
+    format: 9.0
+     value: Convert_Units{flow500.550, M3, CMS }
+}
+
+Table
+{    Title:      PrecipitationR5
+    format: 9.0
+     value: Convert_Units{flow557.550, M3, CMS } * 10
+}
+
+Table
+{    Title:    EvaporationR5
+    format: 9.0
+     Value: convert_units{flow550.555, m3, cms}
+}
+
+Table
+{    Title:    PhreatophyteR5
+    format: 9.0
+     Value: convert_units{flow550.545, m3, cms}
+}
+
+Table
+{    Title:    UpperDemandTXR5
+    format: 9.0
+     Value: convert_units{flow450.440, m3, cms}
+}
+
+Table
+{    Title:    LowerDemandTXR5
+    format: 9.0
+     Value: convert_units{flow600.575, m3, cms}
+}
+
+Table
+{    Title:    MassBalanceR5
+    format: 9.0
+     value: convert_units{flow599.600 - flow600.598, m3, cms}
+}
+
+Table
+{    Title:      SaltToTR5
+    format: 9.0
+     value: salt550
+}
+
+Table
+{    Title:      SaltR5
+    format: 9.0
+     value: salt600
+}
+
+Table
+{    Title:      SaltMassBalanceR5
+    format: 9.0
+     value: SMB_5
+}
+
+// Reach 6
+
+
+Table
+{    Title:      UpstreamR6
+    format: 9.0
+     value: Convert_Units{flow600.650, M3, CMS }
+}
+
+Table
+{    Title:      PrecipitationR6
+    format: 9.0
+     value: Convert_Units{flow657.650, M3, CMS } * 10
+}
+
+Table
+{    Title:    EvaporationR6
+    format: 9.0
+     Value: convert_units{flow650.655, m3, cms}
+}
+
+Table
+{    Title:    PhreatophyteR6
+    format: 9.0
+     Value: convert_units{flow650.645, m3, cms}
+}
+
+Table
+{    Title:    UpperDemandTXR6
+    format: 9.0
+     Value: convert_units{flow650.640, m3, cms}
+}
+
+Table
+{    Title:    LowerDemandTXR6
+    format: 9.0
+     Value: convert_units{flow700.675, m3, cms}
+}
+
+Table
+{    Title:    Matamoros
+    format: 9.0
+     Value: convert_units{flow700.680, m3, cms}
+}
+
+Table
+{    Title:    MassBalanceR6
+    format: 9.0
+     value: convert_units{flow699.700 - flow700.698, m3, cms}
+}
+
+Table
+{    Title:      SaltToTR6
+    format: 9.0
+     value: salt650
+}
+
+Table
+{    Title:      SaltR6
+    format: 9.0
+     value: salt700
+}
+
+Table
+{    Title:      SaltMassBalanceR6
+    format: 9.0
+     value: SMB_6
+}
+
+:END:
