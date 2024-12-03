@@ -3,7 +3,7 @@ import pandas as pd
 
 from scipy.optimize import curve_fit, minimize
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-from typing import Callable
+from typing import Optional
 
 def guassian_function(x, a, b, c):
     return a * np.exp(-b * x) + c
@@ -20,6 +20,17 @@ def base_salinity_function(X, c_local):
     """
     flow_local, flow_in, flow_out, c_in = X
     return (c_in * flow_in + c_local * flow_local) / (-1 * flow_out)
+
+
+def base_salt_mass_balance(X, salt_local):
+    """
+    Based on:
+        flow_out(salt_out) = flow_in(salt_in) + flow_local(salt_local)
+
+    Gives flow_local
+    """
+    flow_out, flow_in, salt_out, salt_in = X
+    return (flow_out * salt_out - flow_in * salt_in) / salt_local
 
 
 def log_transform_sal_diff(X, c_local):
@@ -168,3 +179,33 @@ def segments_fit(X, Y, count):
 
     r = minimize(err, x0=np.r_[seg, py_init], method='Nelder-Mead')
     return func(r.x)
+
+def get_weekly_maxima(
+    df: pd.DataFrame,
+    columns: list[str],
+    drop_if_max: Optional[dict] = None
+) -> pd.DataFrame:
+    """
+    Calculate weekly maxima for specified columns in a DataFrame.
+
+    Args:
+        df: Input DataFrame
+        columns: List of column names to calculate maxima for
+        drop_if_max: Optional dictionary with column name as key and value to check for dropping
+                    Example: {'salinity': 0} will drop weeks where salinity maxima is 0
+
+    Returns:
+        DataFrame with weekly maxima for specified columns
+    """
+    df_weekly = df.copy()
+
+    # Calculate weekly maxima
+    weekly_maxima = df_weekly[columns].resample('W').max()
+
+    # Drop weeks based on specific maxima if requested
+    if drop_if_max is not None:
+        for col, value in drop_if_max.items():
+            if col in columns:
+                weekly_maxima = weekly_maxima[weekly_maxima[col] != value]
+
+    return weekly_maxima

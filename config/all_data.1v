@@ -103,6 +103,12 @@ Table
 }
 
 Table
+{    Title:    DownstreamR1
+    format: 9.0
+     Value: convert_units{flow150.200, m3, cms}
+}
+
+Table
 {    Title:    MassBalanceR1
     format: 9.0
      value: convert_units{flow199.200 - flow200.198, m3, cms}
@@ -258,7 +264,7 @@ Table
 }
 
 Table
-{    Title:    AnzadluasCanal
+{    Title:    AnzalduasCanal
     format: 9.0
      Value: convert_units{flow301.280, m3, cms}
 }
@@ -267,6 +273,12 @@ Table
 {    Title:    Reynosa
     format: 9.0
      Value: convert_units{flow350.320, m3, cms}
+}
+
+Table
+{    Title:    DownstreamR4
+    format: 9.0
+     Value: convert_units{flow350.400, m3, cms}
 }
 
 Table
@@ -332,6 +344,12 @@ Table
 }
 
 Table
+{    Title:    DownstreamR4
+    format: 9.0
+     Value: convert_units{flow450.500, m3, cms}
+}
+
+Table
 {    Title:    MassBalanceR4
     format: 9.0
      value: convert_units{flow499.500 - flow500.498, m3, cms}
@@ -391,6 +409,12 @@ Table
 {    Title:    LowerDemandTXR5
     format: 9.0
      Value: convert_units{flow600.575, m3, cms}
+}
+
+Table
+{    Title:    DownstreamR5
+    format: 9.0
+     Value: convert_units{flow550.600, m3, cms}
 }
 
 Table
@@ -463,6 +487,12 @@ Table
 }
 
 Table
+{    Title:    DownstreamR6
+    format: 9.0
+     Value: convert_units{flow650.700, m3, cms}
+}
+
+Table
 {    Title:    MassBalanceR6
     format: 9.0
      value: convert_units{flow699.700 - flow700.698, m3, cms}
@@ -484,6 +514,26 @@ Table
 {    Title:      SaltMassBalanceR6
     format: 9.0
      value: SMB_6
+}
+
+// Begin extras
+
+Table
+{    Title:      SalinityLosEbanos
+    format: 9.0
+     value: Timesers(losebanos_filled/salinity)
+}
+
+Table
+{    Title:      SalinityRioGrandeCity
+    format: 9.0
+     value: Timesers(riograndecity_filled/salinity)
+}
+
+Table
+{    Title:      SalinityDrenPuertecitos
+    format: 9.0
+     value: Timesers(puertecitos_filled/salinity)
 }
 
 :END:
